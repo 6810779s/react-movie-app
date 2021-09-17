@@ -1,0 +1,37 @@
+.Container {
+  display: flex;
+}
+
+.description {
+  margin-left: 30px;
+}
+
+.description h1 {
+  color: white;
+}
+
+.description p {
+  color: white;
+}
+
+.description hr {
+  color: gray;
+}
+
+.description .release_date {
+  margin-top: 10px;
+  color: gray;
+  border-bottom: 1px solid gray;
+}
+
+.description .summary {
+  margin-top: 20px;
+}
+
+.description .overview {
+  width: 500px;
+  color: white;
+  line-height: 40px;
+  font-size: 20px;
+}
+/*# sourceMappingURL=MoviemainItems.module.css.map */

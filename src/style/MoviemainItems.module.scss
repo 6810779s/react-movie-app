@@ -1,0 +1,30 @@
+.Container{
+  display: flex;
+}
+
+.description{
+  margin-left: 30px;
+  h1{
+    color: white;
+  }
+  p{
+    color: white;
+  }
+  hr{
+    color: gray;
+  }
+  .release_date{
+    margin-top: 10px;
+    color: gray;
+    border-bottom: 1px solid gray;
+  }
+  .summary{
+    margin-top: 20px;
+  }
+  .overview{
+    width: 500px;
+    color: white;
+    line-height: 40px;
+    font-size: 20px;
+  }
+}

@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import Loader from './Spinner';
 import MovieItems from './MovieItems';
+import MoviemainItems from './MoviemainItems';
 import styles from '../style/MovieList.module.css';
 import styled from 'styled-components';
 import axios from 'axios';
 import Slider from 'react-slick';
+
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const MovieList = () => {
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState({
+    main: '',
     popular: '',
     top_rated: '',
     upcoming: '',
@@ -19,11 +22,13 @@ const MovieList = () => {
   const APIKey = '7db3edc572c4459c628c28ce8cec50fa';
   const language = ['ko-KR', 'pt-US'];
   const apiAdrres = [
+    `https://api.themoviedb.org/3/movie/848278/recommendations?api_key=${APIKey}&language=${language[0]}&page=1`,
     `https://api.themoviedb.org/3/movie/popular?api_key=${APIKey}&language=${language[0]}&page=1`,
     `https://api.themoviedb.org/3/movie/top_rated?api_key=${APIKey}&language=${language[0]}&page=1`,
     `https://api.themoviedb.org/3/movie/upcoming?api_key=${APIKey}&language=${language[0]}&page=1`,
     `https://api.themoviedb.org/3/movie/now_playing?api_key=${APIKey}&language=${language[0]}&page=1`,
   ];
+
   const settings = {
     dots: false,
     arrows: true,
@@ -31,6 +36,18 @@ const MovieList = () => {
     speed: 500,
     slidesToShow: 6,
     slidesToScroll: 1,
+  };
+
+  const settings_main = {
+    dots: true,
+    arrows: false,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    infinite: true,
+    speed: 2000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    pauseOnHover: false,
   };
 
   const Wrap = styled.div`
@@ -56,16 +73,37 @@ const MovieList = () => {
       margin-bottom: 5px;
     }
   `;
+
+  const Main_Wrap = styled.div`
+    margin: 3% auto;
+    width: 100%;
+    h2 {
+      margin-bottom: 5px;
+    }
+    .slick-dots {
+      bottom: -50px;
+      margin-top: 200px;
+    }
+    .slick-dots li.slick-active button:before {
+      color: white;
+    }
+    .slick-dots button:before {
+      color: white;
+    }
+  `;
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res1 = await axios.get(apiAdrres[0]);
-        const res2 = await axios.get(apiAdrres[1]);
-        const res3 = await axios.get(apiAdrres[2]);
-        const res4 = await axios.get(apiAdrres[3]);
+        const main = await axios.get(apiAdrres[0]);
+        const res1 = await axios.get(apiAdrres[1]);
+        const res2 = await axios.get(apiAdrres[2]);
+        const res3 = await axios.get(apiAdrres[3]);
+        const res4 = await axios.get(apiAdrres[4]);
 
         setMovies({
+          main: main.data.results.slice(0, 5),
           popular: res1.data.results,
           top_rated: res2.data.results,
           upcoming: res3.data.results,
@@ -79,11 +117,12 @@ const MovieList = () => {
 
     fetchData();
   }, []);
-
   if (loading) {
     return <Loader />;
   }
+
   if (
+    !movies.main ||
     !movies.popular ||
     !movies.top_rated ||
     !movies.upcoming ||
@@ -91,10 +130,28 @@ const MovieList = () => {
   ) {
     return null;
   }
-  console.log(movies.popular);
 
   return (
     <div className={styles.movieContainer}>
+      {/* Main */}
+      <Main_Wrap>
+        <h2>인기</h2>
+        <Slider {...settings_main}>
+          {movies.main.map((movie) => (
+            <MoviemainItems
+              key={movie.id}
+              title={movie.title}
+              poster={'https://image.tmdb.org/t/p/w500' + movie.poster_path}
+              release_date={movie.release_date.slice(0, 4)}
+              overview={
+                movie.overview.length < 100
+                  ? movie.overview
+                  : movie.overview.slice(0, 100) + '...'
+              }
+            />
+          ))}
+        </Slider>
+      </Main_Wrap>
       {/* popular */}
       <Wrap>
         <h2>인기</h2>
@@ -113,7 +170,6 @@ const MovieList = () => {
           ))}
         </Slider>
       </Wrap>
-
       {/* top_rated */}
       <Wrap>
         <h2>평점 높은 순</h2>
@@ -132,7 +188,6 @@ const MovieList = () => {
           ))}
         </Slider>
       </Wrap>
-
       {/* upcoming */}
       <Wrap>
         <h2>개봉 예정</h2>
@@ -151,7 +206,6 @@ const MovieList = () => {
           ))}
         </Slider>
       </Wrap>
-
       {/* now_playing */}
       <Wrap>
         <h2>현재 상영 중</h2>
