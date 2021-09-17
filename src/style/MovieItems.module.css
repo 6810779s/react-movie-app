@@ -7,4 +7,13 @@
 .Container {
   margin-right: 10px;
 }
+
+.contents h3 {
+  margin-top: 5px;
+  color: white;
+}
+
+.contents p {
+  color: gray;
+}
 /*# sourceMappingURL=MovieItems.module.css.map */
