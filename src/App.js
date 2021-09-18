@@ -1,11 +1,30 @@
 import React from 'react';
+import { Route, NavLink, Switch } from 'react-router-dom';
 import MovieList from './components/MovieList';
+import Movie_detailed from './components/Movie_detailed';
+import TvList from './components/TvList';
 import './App.css';
 
 const App = () => {
   return (
-    <div>
-      <MovieList />
+    <div className="container">
+      <ul className="category">
+        <li>
+          <NavLink exact to="/">
+            <p className="nav_selected">Movie</p>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink exact to="/tv">
+            <p className="nav_selected">TV</p>
+          </NavLink>
+        </li>
+      </ul>
+      <Switch>
+        <Route exact path="/" component={MovieList} />
+        <Route exact path="/movie/:movie_id" component={Movie_detailed} />
+        <Route exact path="/tv" component={TvList} />
+      </Switch>
     </div>
   );
 };

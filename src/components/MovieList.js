@@ -75,14 +75,17 @@ const MovieList = () => {
   `;
 
   const Main_Wrap = styled.div`
-    margin: 3% auto;
-    width: 100%;
+    margin: 0 auto;
+    width: 1300px;
+    padding-top: 30px;
     h2 {
       margin-bottom: 5px;
     }
+    .slick-list {
+      width: 1300px;
+      margin-left: 0;
+    }
     .slick-dots {
-      bottom: -50px;
-      margin-top: 200px;
     }
     .slick-dots li.slick-active button:before {
       color: white;
@@ -100,14 +103,12 @@ const MovieList = () => {
         const res1 = await axios.get(apiAdrres[1]);
         const res2 = await axios.get(apiAdrres[2]);
         const res3 = await axios.get(apiAdrres[3]);
-        const res4 = await axios.get(apiAdrres[4]);
 
         setMovies({
           main: main.data.results.slice(0, 5),
           popular: res1.data.results,
           top_rated: res2.data.results,
           upcoming: res3.data.results,
-          now_playing: res4.data.results,
         });
       } catch (e) {
         console.log(e);
@@ -125,8 +126,7 @@ const MovieList = () => {
     !movies.main ||
     !movies.popular ||
     !movies.top_rated ||
-    !movies.upcoming ||
-    !movies.now_playing
+    !movies.upcoming
   ) {
     return null;
   }
@@ -135,11 +135,11 @@ const MovieList = () => {
     <div className={styles.movieContainer}>
       {/* Main */}
       <Main_Wrap>
-        <h2>인기</h2>
         <Slider {...settings_main}>
           {movies.main.map((movie) => (
             <MoviemainItems
               key={movie.id}
+              movie_id={movie.id}
               title={movie.title}
               poster={'https://image.tmdb.org/t/p/w500' + movie.poster_path}
               release_date={movie.release_date.slice(0, 4)}
@@ -159,6 +159,7 @@ const MovieList = () => {
           {movies.popular.map((movie) => (
             <MovieItems
               key={movie.id}
+              movie_id={movie.id}
               title={
                 movie.title.length < 12
                   ? movie.title
@@ -177,6 +178,7 @@ const MovieList = () => {
           {movies.top_rated.map((movie) => (
             <MovieItems
               key={movie.id}
+              movie_id={movie.id}
               title={
                 movie.title.length < 12
                   ? movie.title
@@ -195,24 +197,7 @@ const MovieList = () => {
           {movies.upcoming.map((movie) => (
             <MovieItems
               key={movie.id}
-              title={
-                movie.title.length < 12
-                  ? movie.title
-                  : movie.title.slice(0, 12) + '...'
-              }
-              poster={'https://image.tmdb.org/t/p/w500' + movie.poster_path}
-              release_date={movie.release_date.slice(0, 4)}
-            />
-          ))}
-        </Slider>
-      </Wrap>
-      {/* now_playing */}
-      <Wrap>
-        <h2>현재 상영 중</h2>
-        <Slider {...settings}>
-          {movies.now_playing.map((movie) => (
-            <MovieItems
-              key={movie.id}
+              movie_id={movie.id}
               title={
                 movie.title.length < 12
                   ? movie.title

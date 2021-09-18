@@ -8,4 +8,33 @@ body{
   width: 100%;
   height: 100%;
   background-color: black;
+  position: relative;
+}
+
+a{
+  text-decoration: none;
+}
+.container{
+  width: 1300px;
+  margin: auto;
+}
+
+.container .category{
+  padding: 20px 0;
+}
+.container .category li{
+  float: left;
+  font-size: 20px;
+}
+
+.container .category li:nth-child(even){
+  margin-left: 20px;
+}
+
+.category .nav_selected{
+  color: gray;
+}
+
+.category .active .nav_selected{
+    color: white;
 }
