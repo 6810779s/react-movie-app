@@ -60,46 +60,55 @@ const Movie_detailed = () => {
     <span>{genre.name}&nbsp;</span>
   ));
 
-  const videos_list = movies.movie_videos.map((video) => (
-    <iframe
-      width="420"
-      height="315"
-      src={'https://www.youtube.com/embed/' + video.key + '?autoplay=0'}
-      frameBorder="0"
-      allowFullScreen="allowFullScreen"
-    ></iframe>
+  const videos_list = movies.movie_videos.map((video, index) => (
+    <div>
+      <iframe
+        width="420"
+        height="300"
+        src={'https://www.youtube.com/embed/' + video.key + '?autoplay=0'}
+        frameBorder="0"
+        allowFullScreen="allowFullScreen"
+      ></iframe>
+    </div>
   ));
 
   const similar_list = movies.movie_similar.map((similar) => (
     <li key={similar.id}>
-      <img src={'https://image.tmdb.org/t/p/w500' + similar.poster_path} />
-      {similar.title}
+      <img
+        width="200px"
+        height="300px"
+        src={'https://image.tmdb.org/t/p/w500' + similar.poster_path}
+      />
+      <p>{similar.title}</p>
     </li>
   ));
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.thumbnail}>
         <img
+          width="500"
           src={
             'https://image.tmdb.org/t/p/w500' + movies.movie_detail.poster_path
           }
         />
       </div>
       <div className={styles.desc_container}>
-        <ul>
-          <li>{movies.movie_detail.title}</li>
-          <li>{genres_list}</li>
-          <li>
-            <AiFillStar style={{ color: 'yellow' }} />
-            {movies.movie_detail.vote_average}&nbsp;&nbsp;
-            {movies.movie_detail.release_date.slice(0, 4)}&nbsp;&nbsp;
-            {movies.movie_detail.runtime}min
-          </li>
-          <li>{movies.movie_detail.overview}</li>
-          <li>{videos_list}</li>
-          <li>{similar_list}</li>
-        </ul>
+        <h1>{movies.movie_detail.title}</h1>
+        <p className={styles.genres}>{genres_list}</p>
+        <p className={styles.detail}>
+          <AiFillStar style={{ color: 'yellow' }} />
+          {movies.movie_detail.vote_average}&nbsp;&nbsp;
+          {movies.movie_detail.release_date.slice(0, 4)}&nbsp;&nbsp;
+          {movies.movie_detail.runtime}min
+        </p>
+        <p className={styles.overview}>{movies.movie_detail.overview}</p>
+        <p className={styles.preview}>Preview</p>
+        <div className={styles.videoList}>{videos_list}</div>
+        <p className={styles.similar}>Similar</p>
+        <div className={styles.similarList}>
+          <ul>{similar_list}</ul>
+        </div>
       </div>
     </div>
   );

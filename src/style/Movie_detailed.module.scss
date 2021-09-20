@@ -4,6 +4,57 @@
   box-sizing: border-box;
 }
 
-.desc_container{
-  color: white;
+li{
+  list-style: none;
 }
+
+
+.container{
+  width: 1300px;
+  margin-top: 30px;
+  display: flex;
+
+  .thumbnail{
+    width: 600px;
+    margin-left: 0;
+  }
+  .desc_container{
+    width: 700px;
+    height: 750px;
+    overflow-y: scroll;
+    color: white;
+
+   p{
+     margin-top: 15px;
+   }
+   .preview, .similar{
+     font-size: 25px;
+     margin-bottom: 15px;
+   }
+   .videoList{
+    display: flex;
+    height: 320px;
+    overflow-x: scroll;
+    div{
+      margin-right: 30px;
+    }
+    iframe{
+      border: 1px solid gray;
+    }
+     
+   }
+
+   .similarList{
+     height: 350px;
+     overflow-x: scroll;
+     li{
+       float: left;
+     }
+   }
+
+    
+    
+  }
+}
+
+
