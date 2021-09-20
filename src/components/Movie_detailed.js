@@ -72,16 +72,27 @@ const Movie_detailed = () => {
     </div>
   ));
 
-  const similar_list = movies.movie_similar.map((similar) => (
-    <li key={similar.id}>
-      <img
-        width="200px"
-        height="300px"
-        src={'https://image.tmdb.org/t/p/w500' + similar.poster_path}
-      />
-      <p>{similar.title}</p>
-    </li>
-  ));
+  const similar_list = movies.movie_similar.map(
+    (similar) => (
+      console.log(similar.title),
+      (
+        <li key={similar.id}>
+          <img
+            width="200px"
+            height="300px"
+            src={'https://image.tmdb.org/t/p/w500' + similar.poster_path}
+          />
+          <p>
+            {similar.title.length < 15
+              ? similar.title
+              : similar.title.slice(0, 15) + '...'}
+          </p>
+        </li>
+      )
+    )
+  );
+
+  console.log(videos_list);
 
   return (
     <div className={styles.container}>
@@ -104,10 +115,16 @@ const Movie_detailed = () => {
         </p>
         <p className={styles.overview}>{movies.movie_detail.overview}</p>
         <p className={styles.preview}>Preview</p>
-        <div className={styles.videoList}>{videos_list}</div>
+        <div className={styles.videoList}>
+          {videos_list.length !== 0 ? (
+            videos_list
+          ) : (
+            <p>Sorry, there's no trailer</p>
+          )}
+        </div>
         <p className={styles.similar}>Similar</p>
         <div className={styles.similarList}>
-          <ul>{similar_list}</ul>
+          <ul style={{ width: similar_list.length * 230 }}>{similar_list}</ul>
         </div>
       </div>
     </div>

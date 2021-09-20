@@ -56,5 +56,6 @@ li {
 
 .container .desc_container .similarList li {
   float: left;
+  margin-right: 30px;
 }
 /*# sourceMappingURL=Movie_detailed.module.css.map */
