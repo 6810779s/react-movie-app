@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { AiFillStar } from 'react-icons/ai';
 import Loader from './Spinner';
 import axios from '../../node_modules/axios/index';
 import styles from '../style/Movie_detailed.module.css';
@@ -69,7 +70,6 @@ const Movie_detailed = () => {
     ></iframe>
   ));
 
-  console.log(movies.movie_similar);
   const similar_list = movies.movie_similar.map((similar) => (
     <li key={similar.id}>
       <img src={'https://image.tmdb.org/t/p/w500' + similar.poster_path} />
@@ -89,10 +89,12 @@ const Movie_detailed = () => {
       <div className={styles.desc_container}>
         <ul>
           <li>{movies.movie_detail.title}</li>
+          <li>{genres_list}</li>
           <li>
-            {movies.movie_detail.vote_average} /{' '}
-            {movies.movie_detail.release_date.slice(0, 4)} /{' '}
-            {movies.movie_detail.runtime} / {genres_list}
+            <AiFillStar style={{ color: 'yellow' }} />
+            {movies.movie_detail.vote_average}&nbsp;&nbsp;
+            {movies.movie_detail.release_date.slice(0, 4)}&nbsp;&nbsp;
+            {movies.movie_detail.runtime}min
           </li>
           <li>{movies.movie_detail.overview}</li>
           <li>{videos_list}</li>
