@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../style/MoviemainItems.module.css';
-import { Route, NavLink, Switch } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const MoviemainItems = ({
   movie_id,

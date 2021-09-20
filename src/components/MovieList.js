@@ -70,7 +70,8 @@ const MovieList = () => {
       right: -10px;
     }
     h2 {
-      margin-bottom: 5px;
+      color: white;
+      margin-bottom: 10px;
     }
   `;
 

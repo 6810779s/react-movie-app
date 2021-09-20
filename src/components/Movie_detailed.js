@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
+import { NavLink } from 'react-router-dom';
 import Loader from './Spinner';
 import axios from '../../node_modules/axios/index';
 import styles from '../style/Movie_detailed.module.css';
+import MovieDetailItems from './MovieDetailItems';
 
 const Movie_detailed = () => {
   const params = useParams();
@@ -61,7 +63,7 @@ const Movie_detailed = () => {
   ));
 
   const videos_list = movies.movie_videos.map((video, index) => (
-    <div>
+    <div key={index}>
       <iframe
         width="420"
         height="300"
@@ -72,31 +74,39 @@ const Movie_detailed = () => {
     </div>
   ));
 
-  const similar_list = movies.movie_similar.map(
-    (similar) => (
-      console.log(similar.title),
-      (
-        <li key={similar.id}>
-          <img
-            width="200px"
-            height="300px"
-            src={'https://image.tmdb.org/t/p/w500' + similar.poster_path}
-          />
-          <p>
-            {similar.title.length < 15
-              ? similar.title
-              : similar.title.slice(0, 15) + '...'}
-          </p>
-        </li>
-      )
-    )
-  );
-
-  console.log(videos_list);
+  const similar_list = movies.movie_similar.map((similar) => (
+    <li key={similar.id}>
+      <img
+        width="200px"
+        height="300px"
+        src={'https://image.tmdb.org/t/p/w500' + similar.poster_path}
+      />
+      <p>
+        {similar.title.length < 15
+          ? similar.title
+          : similar.title.slice(0, 15) + '...'}
+      </p>
+    </li>
+  ));
 
   return (
     <div className={styles.container}>
-      <div className={styles.thumbnail}>
+      {movies.movie_detail.map((detail) => {
+        <MovieDetailItems
+          key={detail.id}
+          movie_id={detail.id}
+          poster={`https://image.tmdb.org/t/p/w500` + detail.poster_path}
+          title={detail.title}
+          genres_list={genres_list}
+          vote_average={movies.movie_detail.vote_average}
+          release_date={movies.movie_detail.release_date.slice(0, 4)}
+          runtime={movies.movie_detail.runtime}
+          overview={movies.movie_detail.overview}
+          videos_list={videos_list}
+          similar_list={similar_list}
+        />;
+      })}
+      {/* <div className={styles.thumbnail}>
         <img
           width="500"
           src={
@@ -126,7 +136,7 @@ const Movie_detailed = () => {
         <div className={styles.similarList}>
           <ul style={{ width: similar_list.length * 230 }}>{similar_list}</ul>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
