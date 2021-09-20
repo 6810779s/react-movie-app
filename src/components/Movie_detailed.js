@@ -34,9 +34,6 @@ const Movie_detailed = () => {
         const movieVideos_res = await axios.get(apiAddress[1]);
         const movieSimilar_res = await axios.get(apiAddress[2]);
 
-        console.log(movieVideos_res.data.results);
-        console.log(movieSimilar_res);
-
         setMovies({
           movie_detail: movieDetail_res.data,
           movie_videos: movieVideos_res.data.results,
@@ -62,6 +59,24 @@ const Movie_detailed = () => {
     <span>{genre.name}&nbsp;</span>
   ));
 
+  const videos_list = movies.movie_videos.map((video) => (
+    <iframe
+      width="420"
+      height="315"
+      src={'https://www.youtube.com/embed/' + video.key + '?autoplay=0'}
+      frameBorder="0"
+      allowFullScreen="allowFullScreen"
+    ></iframe>
+  ));
+
+  console.log(movies.movie_similar);
+  const similar_list = movies.movie_similar.map((similar) => (
+    <li key={similar.id}>
+      <img src={'https://image.tmdb.org/t/p/w500' + similar.poster_path} />
+      {similar.title}
+    </li>
+  ));
+
   return (
     <div>
       <div className={styles.thumbnail}>
@@ -80,16 +95,8 @@ const Movie_detailed = () => {
             {movies.movie_detail.runtime} / {genres_list}
           </li>
           <li>{movies.movie_detail.overview}</li>
-          <li>
-            <iframe
-              width="420"
-              height="315"
-              src="https://www.youtube.com/embed/az2sQoPocUQ?autoplay=0"
-              frameBorder="0"
-              allowFullScreen="allowFullScreen"
-            ></iframe>
-          </li>
-          <li>similar movies</li>
+          <li>{videos_list}</li>
+          <li>{similar_list}</li>
         </ul>
       </div>
     </div>
