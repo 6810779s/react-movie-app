@@ -34,10 +34,13 @@ const Movie_detailed = () => {
         const movieVideos_res = await axios.get(apiAddress[1]);
         const movieSimilar_res = await axios.get(apiAddress[2]);
 
-        console.log(movieDetail_res.data);
-        console.log('ss', movies.movie_detail);
+        console.log(movieVideos_res.data.results);
+        console.log(movieSimilar_res);
+
         setMovies({
-          movie_detail:movieDetail_res
+          movie_detail: movieDetail_res.data,
+          movie_videos: movieVideos_res.data.results,
+          movie_similar: movieSimilar_res.data.results,
         });
       } catch (e) {
         console.log(e);
@@ -82,8 +85,8 @@ const Movie_detailed = () => {
               width="420"
               height="315"
               src="https://www.youtube.com/embed/az2sQoPocUQ?autoplay=0"
-              frameborder="0"
-              allowfullscreen="allowfullscreen"
+              frameBorder="0"
+              allowFullScreen="allowFullScreen"
             ></iframe>
           </li>
           <li>similar movies</li>
