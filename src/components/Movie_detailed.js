@@ -89,23 +89,25 @@ const Movie_detailed = () => {
     </li>
   ));
 
+  console.log('s', movies.movie_detail);
+
   return (
     <div className={styles.container}>
-      {movies.movie_detail.map((detail) => {
-        <MovieDetailItems
-          key={detail.id}
-          movie_id={detail.id}
-          poster={`https://image.tmdb.org/t/p/w500` + detail.poster_path}
-          title={detail.title}
-          genres_list={genres_list}
-          vote_average={movies.movie_detail.vote_average}
-          release_date={movies.movie_detail.release_date.slice(0, 4)}
-          runtime={movies.movie_detail.runtime}
-          overview={movies.movie_detail.overview}
-          videos_list={videos_list}
-          similar_list={similar_list}
-        />;
-      })}
+      <MovieDetailItems
+        key={movies.movie_detail.id}
+        movie_id={movies.movie_detail.id}
+        poster={
+          `https://image.tmdb.org/t/p/w500` + movies.movie_detail.poster_path
+        }
+        title={movies.movie_detail.title}
+        genres_list={genres_list}
+        vote_average={movies.movie_detail.vote_average}
+        release_date={movies.movie_detail.release_date.slice(0, 4)}
+        runtime={movies.movie_detail.runtime}
+        overview={movies.movie_detail.overview}
+        videos_list={videos_list}
+        similar_list={similar_list}
+      />
       {/* <div className={styles.thumbnail}>
         <img
           width="500"
