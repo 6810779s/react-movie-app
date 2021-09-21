@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Loader from './Spinner';
-import axios from '../../node_modules/axios/index';
+import Loader from '../Spinner';
+import axios from '../../../node_modules/axios/index';
 import MovieDetailItems from './MovieDetailItems';
 
 const Movie_detailed = () => {
@@ -72,7 +72,13 @@ const Movie_detailed = () => {
   ));
 
   const similar_list = movies.movie_similar.map((similar) => (
-    <li key={similar.id}>
+    <li
+      key={similar.id}
+      onClick={() => {
+        window.location.replace('/movie/' + similar.id);
+      }}
+      style={{ cursor: 'pointer' }}
+    >
       <img
         width="200px"
         height="300px"
@@ -92,7 +98,6 @@ const Movie_detailed = () => {
     <div>
       <MovieDetailItems
         key={movies.movie_detail.id}
-        movie_id={movies.movie_detail.id}
         poster={
           `https://image.tmdb.org/t/p/w500` + movies.movie_detail.poster_path
         }

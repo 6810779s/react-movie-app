@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, NavLink, Switch } from 'react-router-dom';
-import MovieList from './components/MovieList';
-import Movie_detailed from './components/Movie_detailed';
-import TvList from './components/TvList';
+import MovieList from './components/movieComponents/MovieList';
+import Movie_detailed from './components/movieComponents/Movie_detailed';
+import TvList from './components/tvComponents/TvList';
 import './App.css';
 
 const App = () => {

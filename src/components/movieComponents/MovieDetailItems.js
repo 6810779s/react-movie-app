@@ -1,10 +1,8 @@
 import React from 'react';
-import styles from '../style/Movie_detailed.module.css';
+import styles from '../../style/Movie_detailed.module.css';
 import { AiFillStar } from 'react-icons/ai';
-import { NavLink } from 'react-router-dom';
 
 const MovieDetailItems = ({
-  movie_id,
   poster,
   title,
   genres_list,

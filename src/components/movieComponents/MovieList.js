@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Loader from './Spinner';
+import Loader from '../Spinner';
 import MovieItems from './MovieItems';
 import MoviemainItems from './MoviemainItems';
-import styles from '../style/MovieList.module.css';
+import styles from '../../style/MovieList.module.css';
 import styled from 'styled-components';
 import axios from 'axios';
 import Slider from 'react-slick';

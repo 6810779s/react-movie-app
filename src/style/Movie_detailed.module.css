@@ -8,10 +8,6 @@ li {
   list-style: none;
 }
 
-p {
-  color: white;
-}
-
 .container {
   width: 1300px;
   margin-top: 30px;
@@ -37,6 +33,10 @@ p {
 .container .desc_container .preview, .container .desc_container .similar {
   font-size: 25px;
   margin-bottom: 15px;
+}
+
+.container .desc_container .overview {
+  line-height: 25px;
 }
 
 .container .desc_container .videoList {

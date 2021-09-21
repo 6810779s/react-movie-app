@@ -8,10 +8,6 @@ li{
   list-style: none;
 }
 
-p{
-  color:white;
-}
-
 
 .container{
   width: 1300px;
@@ -34,6 +30,10 @@ p{
    .preview, .similar{
      font-size: 25px;
      margin-bottom: 15px;
+   }
+
+   .overview{
+     line-height: 25px;
    }
    .videoList{
     display: flex;
