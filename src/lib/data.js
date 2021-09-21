@@ -2,12 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 export default function usePromise(promiseCreator) {
   const [loading, setLoading] = useState(false);
-  const [movies, setMovies] = useState({
-    popular: '',
-    top_rated: '',
-    upcoming: '',
-    now_playing: '',
-  });
+  const [movies, setMovies] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -22,6 +17,6 @@ export default function usePromise(promiseCreator) {
       setLoading(false);
     };
     fetchData();
-  });
+  }, []);
   return [loading, movies, error];
 }

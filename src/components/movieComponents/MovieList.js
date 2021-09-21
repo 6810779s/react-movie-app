@@ -3,6 +3,7 @@ import Loader from '../Spinner';
 import MovieItems from './MovieItems';
 import MoviemainItems from './MoviemainItems';
 import styles from '../../style/MovieList.module.css';
+import usePromise from '../../lib/data';
 import styled from 'styled-components';
 import axios from 'axios';
 import Slider from 'react-slick';
@@ -11,14 +12,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const MovieList = () => {
-  const [loading, setLoading] = useState(false);
-  const [movies, setMovies] = useState({
-    main: '',
-    popular: '',
-    top_rated: '',
-    upcoming: '',
-    now_playing: '',
-  });
   const APIKey = '7db3edc572c4459c628c28ce8cec50fa';
   const language = ['ko-KR', 'pt-US'];
   const apiAdrres = [
@@ -96,40 +89,29 @@ const MovieList = () => {
     }
   `;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const main = await axios.get(apiAdrres[0]);
-        const res1 = await axios.get(apiAdrres[1]);
-        const res2 = await axios.get(apiAdrres[2]);
-        const res3 = await axios.get(apiAdrres[3]);
+  const [loading1, main, error1] = usePromise(() => {
+    return axios.get(apiAdrres[0]);
+  });
+  const [loading2, popular, error2] = usePromise(() => {
+    return axios.get(apiAdrres[1]);
+  });
+  const [loading3, top_rated, error3] = usePromise(() => {
+    return axios.get(apiAdrres[2]);
+  });
+  const [loading4, upcoming, error4] = usePromise(() => {
+    return axios.get(apiAdrres[3]);
+  });
 
-        setMovies({
-          main: main.data.results.slice(0, 5),
-          popular: res1.data.results,
-          top_rated: res2.data.results,
-          upcoming: res3.data.results,
-        });
-      } catch (e) {
-        console.log(e);
-      }
-      setLoading(false);
-    };
-
-    fetchData();
-  }, []);
-  if (loading) {
+  if (loading1 || loading2 || loading3 || loading4) {
     return <Loader />;
   }
 
-  if (
-    !movies.main ||
-    !movies.popular ||
-    !movies.top_rated ||
-    !movies.upcoming
-  ) {
+  if (!main || !popular || !top_rated || !upcoming) {
     return null;
+  }
+
+  if (error1 || error2 || error3 || error4) {
+    return '에러 발생';
   }
 
   return (
@@ -137,7 +119,7 @@ const MovieList = () => {
       {/* Main */}
       <Main_Wrap>
         <Slider {...settings_main}>
-          {movies.main.map((movie) => (
+          {main.data.results.slice(0, 5).map((movie) => (
             <MoviemainItems
               key={movie.id}
               movie_id={movie.id}
@@ -157,7 +139,7 @@ const MovieList = () => {
       <Wrap>
         <h2>인기</h2>
         <Slider {...settings}>
-          {movies.popular.map((movie) => (
+          {popular.data.results.map((movie) => (
             <MovieItems
               key={movie.id}
               movie_id={movie.id}
@@ -176,7 +158,7 @@ const MovieList = () => {
       <Wrap>
         <h2>평점 높은 순</h2>
         <Slider {...settings}>
-          {movies.top_rated.map((movie) => (
+          {top_rated.data.results.map((movie) => (
             <MovieItems
               key={movie.id}
               movie_id={movie.id}
@@ -195,7 +177,7 @@ const MovieList = () => {
       <Wrap>
         <h2>개봉 예정</h2>
         <Slider {...settings}>
-          {movies.upcoming.map((movie) => (
+          {upcoming.data.results.map((movie) => (
             <MovieItems
               key={movie.id}
               movie_id={movie.id}
