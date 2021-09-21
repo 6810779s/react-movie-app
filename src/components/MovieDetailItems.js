@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from '../style/Movie_detailed.module.css';
+import { AiFillStar } from 'react-icons/ai';
+import { NavLink } from 'react-router-dom';
 
 const MovieDetailItems = ({
   movie_id,
@@ -19,15 +21,15 @@ const MovieDetailItems = ({
         <img width="500" src={'https://image.tmdb.org/t/p/w500' + poster} />
       </div>
       <div className={styles.desc_container}>
-        <h1>{movies.movie_detail.title}</h1>
+        <h1>{title}</h1>
         <p className={styles.genres}>{genres_list}</p>
         <p className={styles.detail}>
           <AiFillStar style={{ color: 'yellow' }} />
-          {movies.movie_detail.vote_average}&nbsp;&nbsp;
-          {movies.movie_detail.release_date.slice(0, 4)}&nbsp;&nbsp;
-          {movies.movie_detail.runtime}min
+          {vote_average}&nbsp;&nbsp;
+          {release_date}&nbsp;&nbsp;
+          {runtime}min
         </p>
-        <p className={styles.overview}>{movies.movie_detail.overview}</p>
+        <p className={styles.overview}>{overview}</p>
         <p className={styles.preview}>Preview</p>
         <div className={styles.videoList}>
           {videos_list.length !== 0 ? (

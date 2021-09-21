@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { AiFillStar } from 'react-icons/ai';
-import { NavLink } from 'react-router-dom';
 import Loader from './Spinner';
 import axios from '../../node_modules/axios/index';
-import styles from '../style/Movie_detailed.module.css';
 import MovieDetailItems from './MovieDetailItems';
 
 const Movie_detailed = () => {
@@ -92,7 +89,7 @@ const Movie_detailed = () => {
   console.log('s', movies.movie_detail);
 
   return (
-    <div className={styles.container}>
+    <div>
       <MovieDetailItems
         key={movies.movie_detail.id}
         movie_id={movies.movie_detail.id}
@@ -108,37 +105,6 @@ const Movie_detailed = () => {
         videos_list={videos_list}
         similar_list={similar_list}
       />
-      {/* <div className={styles.thumbnail}>
-        <img
-          width="500"
-          src={
-            'https://image.tmdb.org/t/p/w500' + movies.movie_detail.poster_path
-          }
-        />
-      </div>
-      <div className={styles.desc_container}>
-        <h1>{movies.movie_detail.title}</h1>
-        <p className={styles.genres}>{genres_list}</p>
-        <p className={styles.detail}>
-          <AiFillStar style={{ color: 'yellow' }} />
-          {movies.movie_detail.vote_average}&nbsp;&nbsp;
-          {movies.movie_detail.release_date.slice(0, 4)}&nbsp;&nbsp;
-          {movies.movie_detail.runtime}min
-        </p>
-        <p className={styles.overview}>{movies.movie_detail.overview}</p>
-        <p className={styles.preview}>Preview</p>
-        <div className={styles.videoList}>
-          {videos_list.length !== 0 ? (
-            videos_list
-          ) : (
-            <p>Sorry, there's no trailer</p>
-          )}
-        </div>
-        <p className={styles.similar}>Similar</p>
-        <div className={styles.similarList}>
-          <ul style={{ width: similar_list.length * 230 }}>{similar_list}</ul>
-        </div>
-      </div> */}
     </div>
   );
 };
