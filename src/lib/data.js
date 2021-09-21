@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function usePromise(promiseCreator) {
+function usePromise(promiseCreator) {
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState(null);
   const [error, setError] = useState(null);
@@ -20,3 +20,8 @@ export default function usePromise(promiseCreator) {
   }, []);
   return [loading, movies, error];
 }
+
+const APIKey = '7db3edc572c4459c628c28ce8cec50fa';
+const language = ['ko-KR', 'pt-US'];
+
+export { usePromise, APIKey, language };

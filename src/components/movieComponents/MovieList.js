@@ -3,7 +3,7 @@ import Loader from '../Spinner';
 import MovieItems from './MovieItems';
 import MoviemainItems from './MoviemainItems';
 import styles from '../../style/MovieList.module.css';
-import usePromise from '../../lib/data';
+import { usePromise, APIKey, language } from '../../lib/data';
 import styled from 'styled-components';
 import axios from 'axios';
 import Slider from 'react-slick';
@@ -12,9 +12,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 const MovieList = () => {
-  const APIKey = '7db3edc572c4459c628c28ce8cec50fa';
-  const language = ['ko-KR', 'pt-US'];
-  const apiAdrres = [
+  const apiAddress = [
     `https://api.themoviedb.org/3/movie/848278/recommendations?api_key=${APIKey}&language=${language[0]}&page=1`,
     `https://api.themoviedb.org/3/movie/popular?api_key=${APIKey}&language=${language[0]}&page=1`,
     `https://api.themoviedb.org/3/movie/top_rated?api_key=${APIKey}&language=${language[0]}&page=1`,
@@ -90,16 +88,16 @@ const MovieList = () => {
   `;
 
   const [loading1, main, error1] = usePromise(() => {
-    return axios.get(apiAdrres[0]);
+    return axios.get(apiAddress[0]);
   });
   const [loading2, popular, error2] = usePromise(() => {
-    return axios.get(apiAdrres[1]);
+    return axios.get(apiAddress[1]);
   });
   const [loading3, top_rated, error3] = usePromise(() => {
-    return axios.get(apiAdrres[2]);
+    return axios.get(apiAddress[2]);
   });
   const [loading4, upcoming, error4] = usePromise(() => {
-    return axios.get(apiAdrres[3]);
+    return axios.get(apiAddress[3]);
   });
 
   if (loading1 || loading2 || loading3 || loading4) {
