@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 const TvmainItems = ({ tv_id, title, poster, first_air_date, overview }) => {
   return (
     <div className={styles.Container}>
-      <NavLink exact to={`/tv/` + tv_id}> 
+      <NavLink exact to={`/tv/` + tv_id}>
         {poster && (
           <div className={styles.thumbnail}>
             <img
