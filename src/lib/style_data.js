@@ -61,7 +61,7 @@ const settings_main = {
   autoplay: true,
   autoplaySpeed: 5000,
   infinite: true,
-  speed: 2000,
+  speed: 3000,
   slidesToShow: 1,
   slidesToScroll: 1,
   pauseOnHover: false,
