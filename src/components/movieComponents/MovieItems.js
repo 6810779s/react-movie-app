@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../style/movieStyles/MovieItems.module.css';
+import styles from '../../style/lib/Items.module.css';
 import { NavLink } from 'react-router-dom';
 
 const MovieItems = ({ movie_id, title, poster, release_date }) => {

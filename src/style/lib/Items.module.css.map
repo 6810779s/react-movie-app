@@ -2,8 +2,8 @@
     "version": 3,
     "mappings": "AAAA,AAAA,CAAC,CAAA;EACC,UAAU,EAAE,UAAU;EACtB,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;CACX;;AAED,AAAA,UAAU,CAAA;EACR,YAAY,EAAE,IAAI;CACnB;;AAED,AACE,SADO,CACP,EAAE,CAAA;EACA,UAAU,EAAE,GAAG;EACf,KAAK,EAAE,KAAK;CACb;;AAJH,AAKE,SALO,CAKP,CAAC,CAAA;EACC,KAAK,EAAE,IAAI;CACZ",
     "sources": [
-        "MovieItems.module.scss"
+        "Items.module.scss"
     ],
     "names": [],
-    "file": "MovieItems.module.css"
+    "file": "Items.module.css"
 }

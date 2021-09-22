@@ -73,7 +73,7 @@ const TvList = () => {
           {popular.data.results.map((tv) => (
             <TvItems
               key={tv.id}
-              movie_id={tv.id}
+              tv_id={tv.id}
               // title={
               //   tv.name.length < 12 ? tv.name : tv.name.slice(0, 12) + '...'
               // }
@@ -88,10 +88,10 @@ const TvList = () => {
       <Wrap>
         <h2>평점 높은 순</h2>
         <Slider {...settings}>
-          {popular.data.results.map((tv) => (
+          {top_rated.data.results.map((tv) => (
             <TvItems
               key={tv.id}
-              movie_id={tv.id}
+              tv_id={tv.id}
               title={
                 tv.name.length < 12 ? tv.name : tv.name.slice(0, 12) + '...'
               }
@@ -106,15 +106,15 @@ const TvList = () => {
       <Wrap>
         <h2>현재 상영작</h2>
         <Slider {...settings}>
-          {popular.data.results.map((tv) => (
+          {on_the_air.data.results.map((tv) => (
             <TvItems
               key={tv.id}
-              movie_id={tv.id}
+              tv_id={tv.id}
               title={
                 tv.name.length < 12 ? tv.name : tv.name.slice(0, 12) + '...'
               }
               poster={'https://image.tmdb.org/t/p/w500' + tv.poster_path}
-              release_date={tv.first_air_date.slice(0, 4)}
+              first_air_date={tv.first_air_date.slice(0, 4)}
             />
           ))}
         </Slider>

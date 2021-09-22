@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../style/movieStyles/MoviemainItems.module.css';
+import styles from '../../style/lib/mainItems.module.css';
 import { NavLink } from 'react-router-dom';
 
 const TvmainItems = ({ tv_id, title, poster, first_air_date, overview }) => {
