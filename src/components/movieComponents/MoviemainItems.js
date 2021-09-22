@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../style/MoviemainItems.module.css';
+import styles from '../../style/movieStyles/MoviemainItems.module.css';
 import { NavLink } from 'react-router-dom';
 
 const MoviemainItems = ({

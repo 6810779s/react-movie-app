@@ -2,10 +2,10 @@ import React from 'react';
 import styles from '../../style/movieStyles/MovieItems.module.css';
 import { NavLink } from 'react-router-dom';
 
-const MovieItems = ({ movie_id, title, poster, release_date }) => {
+const TvmainItems = ({ tv_id, title, poster, first_air_date, overview }) => {
   return (
     <div className={styles.Container}>
-      <NavLink exact to={`/movie/` + movie_id}>
+      <NavLink exact to={`/tv/` + tv_id}> 
         {poster && (
           <div className={styles.thumbnail}>
             <img
@@ -18,10 +18,10 @@ const MovieItems = ({ movie_id, title, poster, release_date }) => {
       </NavLink>
       <div className={styles.contents}>
         <h3>{title}</h3>
-        <p>{release_date}</p>
+        <p>{first_air_date}</p>
       </div>
     </div>
   );
 };
 
-export default MovieItems;
+export default TvmainItems;

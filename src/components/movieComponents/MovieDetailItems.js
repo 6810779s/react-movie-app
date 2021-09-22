@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../style/Movie_detailed.module.css';
+import styles from '../../style/movieStyles/Movie_detailed.module.css';
 import { AiFillStar } from 'react-icons/ai';
 
 const MovieDetailItems = ({

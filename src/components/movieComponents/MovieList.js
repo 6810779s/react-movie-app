@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Loader from '../Spinner';
 import MovieItems from './MovieItems';
 import MoviemainItems from './MoviemainItems';
-import styles from '../../style/MovieList.module.css';
+import styles from '../../style/movieStyles/MovieList.module.css';
 import { usePromise, APIKey, language } from '../../lib/data';
-import styled from 'styled-components';
+import { Wrap, Main_Wrap, settings, settings_main } from '../../lib/style_data';
 import axios from 'axios';
 import Slider from 'react-slick';
 
@@ -19,73 +19,6 @@ const MovieList = () => {
     `https://api.themoviedb.org/3/movie/upcoming?api_key=${APIKey}&language=${language[0]}&page=1`,
     `https://api.themoviedb.org/3/movie/now_playing?api_key=${APIKey}&language=${language[0]}&page=1`,
   ];
-
-  const settings = {
-    dots: false,
-    arrows: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 1,
-  };
-
-  const settings_main = {
-    dots: true,
-    arrows: false,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    infinite: true,
-    speed: 2000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    pauseOnHover: false,
-  };
-
-  const Wrap = styled.div`
-    margin: 3% auto;
-    width: 100%;
-    .slick-prev:before {
-      color: gray; // 버튼 색은 검은색으로
-      font-size: 50px;
-    }
-    .slick-prev {
-      z-index: 9999;
-      left: -55px;
-    }
-    .slick-next:before {
-      color: gray; // 버튼 색은 검은색으로
-      font-size: 50px;
-    }
-    .slick-next {
-      z-index: 9999;
-      right: -10px;
-    }
-    h2 {
-      color: white;
-      margin-bottom: 10px;
-    }
-  `;
-
-  const Main_Wrap = styled.div`
-    margin: 0 auto;
-    width: 1300px;
-    padding-top: 30px;
-    h2 {
-      margin-bottom: 5px;
-    }
-    .slick-list {
-      width: 1300px;
-      margin-left: 0;
-    }
-    .slick-dots {
-    }
-    .slick-dots li.slick-active button:before {
-      color: white;
-    }
-    .slick-dots button:before {
-      color: white;
-    }
-  `;
 
   const [loading1, main, error1] = usePromise(() => {
     return axios.get(apiAddress[0]);
