@@ -10,7 +10,7 @@ const App = () => {
     <div className="container">
       <ul className="category">
         <li>
-          <NavLink exact to="/">
+          <NavLink exact to="/react-movie-app">
             <p className="nav_selected">Movie</p>
           </NavLink>
         </li>
@@ -21,7 +21,7 @@ const App = () => {
         </li>
       </ul>
       <Switch>
-        <Route exact path="/" component={MovieList} />
+        <Route exact path="/react-movie-app" component={MovieList} />
         <Route exact path="/movie/:movie_id" component={Movie_detailed} />
         <Route exact path="/tv" component={TvList} />
       </Switch>
