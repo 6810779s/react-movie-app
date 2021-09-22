@@ -1,0 +1,85 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+.container {
+  width: 1300px;
+  margin-top: 30px;
+  display: flex;
+}
+
+.container .thumbnail {
+  width: 600px;
+  margin-left: 0;
+}
+
+.container .desc_container {
+  width: 700px;
+  height: 750px;
+  overflow-y: scroll;
+  color: white;
+}
+
+.container .desc_container p {
+  margin-top: 15px;
+}
+
+.container .desc_container .preview, .container .desc_container .similar {
+  font-size: 25px;
+  margin-bottom: 15px;
+}
+
+.container .desc_container .creditCast {
+  width: 700px;
+  overflow: scroll;
+  display: flex;
+}
+
+.container .desc_container .creditCast div {
+  margin-right: 20px;
+}
+
+.container .desc_container .creditCrew {
+  width: 700px;
+  overflow: scroll;
+  display: flex;
+}
+
+.container .desc_container .creditCrew div {
+  margin-right: 20px;
+}
+
+.container .desc_container .overview {
+  line-height: 25px;
+}
+
+.container .desc_container .videoList {
+  display: flex;
+  height: 320px;
+  overflow-x: scroll;
+}
+
+.container .desc_container .videoList div {
+  margin-right: 30px;
+}
+
+.container .desc_container .videoList iframe {
+  border: 1px solid gray;
+}
+
+.container .desc_container .similarList {
+  height: 350px;
+  overflow-x: scroll;
+}
+
+.container .desc_container .similarList li {
+  float: left;
+  margin-right: 30px;
+}
+/*# sourceMappingURL=detail.module.css.map */

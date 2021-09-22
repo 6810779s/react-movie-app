@@ -31,3 +31,87 @@
     }
   }
 }
+
+@mixin detailed{
+  *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  li{
+    list-style: none;
+  }
+  
+  
+  .container{
+    width: 1300px;
+    margin-top: 30px;
+    display: flex;
+  
+    .thumbnail{
+      width: 600px;
+      margin-left: 0;
+    }
+    .desc_container{
+      width: 700px;
+      height: 750px;
+      overflow-y: scroll;
+      color: white;
+  
+     p{
+       margin-top: 15px;
+     }
+     .preview, .similar{
+       font-size: 25px;
+       margin-bottom: 15px;
+     }
+
+     .creditCast{
+       width: 700px;
+       overflow: scroll;
+       display: flex;
+       div{
+         margin-right: 20px;
+       }
+     }
+
+     .creditCrew{
+       width: 700px;
+       overflow: scroll;
+       display: flex;
+       div{
+        margin-right: 20px;
+      }
+     }
+  
+     .overview{
+       line-height: 25px;
+     }
+     .videoList{
+      display: flex;
+      height: 320px;
+      overflow-x: scroll;
+      div{
+        margin-right: 30px;
+      }
+      iframe{
+        border: 1px solid gray;
+      }
+       
+     }
+  
+     .similarList{
+       height: 350px;
+       overflow-x: scroll;
+       li{
+         float: left;
+         margin-right: 30px;
+       }
+     }
+  
+      
+      
+    }
+  }  
+}

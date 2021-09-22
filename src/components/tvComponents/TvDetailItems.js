@@ -2,15 +2,17 @@ import React from 'react';
 import styles from '../../style/lib/detail.module.css';
 import { AiFillStar } from 'react-icons/ai';
 
-const MovieDetailItems = ({
+const TvDetailItems = ({
   poster,
   title,
   genres_list,
   vote_average,
-  release_date,
-  runtime,
+  first_air_date,
+  number_of_seasons,
+  number_of_episodes,
   overview,
-  videos_list,
+  creditCast_list,
+  creditCrew_list,
   similar_list,
 }) => {
   return (
@@ -24,17 +26,16 @@ const MovieDetailItems = ({
         <p className={styles.detail}>
           <AiFillStar style={{ color: 'yellow' }} />
           {vote_average}&nbsp;&nbsp;
-          {release_date}&nbsp;&nbsp;
-          {runtime}min
+          {first_air_date}&nbsp;&nbsp;
+          {number_of_episodes}부작 시즌 {number_of_seasons}개
         </p>
         <p className={styles.overview}>{overview}</p>
-        <p className={styles.preview}>Preview</p>
-        <div className={styles.videoList}>
-          {videos_list.length !== 0 ? (
-            videos_list
-          ) : (
-            <p>Sorry, there's no trailer</p>
-          )}
+        <p className={styles.preview}>인물 정보</p>
+        <p>출연진</p>
+        <div className={styles.creditCast}>{creditCast_list}</div>
+        <p>제작진</p>
+        <div className={styles.creditCrew}>
+          {creditCrew_list.length !== 0 ? creditCrew_list : ''}
         </div>
         <p className={styles.similar}>Similar</p>
         <div className={styles.similarList}>
@@ -45,4 +46,4 @@ const MovieDetailItems = ({
   );
 };
 
-export default MovieDetailItems;
+export default TvDetailItems;
