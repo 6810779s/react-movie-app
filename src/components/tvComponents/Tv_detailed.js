@@ -39,7 +39,7 @@ const Tv_detailed = () => {
   const genres_list = tvDetail_res.data.genres.map((genre) => (
     <span>{genre.name}&nbsp;</span>
   ));
-  console.log(tvCredit_res.data.crew);
+
   const creditCast_list = tvCredit_res.data.cast.map((credit, index) => (
     <div key={index}>
       {credit.profile_path !== null ? (

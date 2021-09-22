@@ -23,9 +23,22 @@ const App = () => {
       </ul>
       <Switch>
         <Route exact path="/react-movie-app" component={MovieList} />
-        <Route exact path="/movie/:movie_id" component={Movie_detailed} />
+        <Route
+          exact
+          path="/movie/:movie_id"
+          render={(props) => (
+            <Movie_detailed key={props.match.params.movie_id} {...props} />
+          )}
+        />
         <Route exact path="/tv" component={TvList} />
-        <Route exact path="/tv/:tv_id" component={Tv_detailed} />
+        <Route
+          exact
+          path="/tv/:tv_id"
+          component={Tv_detailed}
+          render={(props) => (
+            <Tv_detailed key={props.march.params.tv_id} {...props} />
+          )}
+        />
         <Route path="/">
           <h1 className="notFound">Not found :(</h1>
         </Route>

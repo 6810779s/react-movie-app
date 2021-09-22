@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { usePromise, APIKey, language } from '../../lib/data';
 import Loader from '../Spinner';
 import axios from '../../../node_modules/axios/index';
@@ -13,7 +13,6 @@ const Movie_detailed = () => {
     `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${APIKey}&language=${language[0]}`,
     `https://api.themoviedb.org/3/movie/${movie_id}/similar?api_key=${APIKey}&language=${language[0]}&page=1`,
   ];
-
   //youtube 재생
   /*
   https://www.youtube.com/embed/&{비디오 key}?autoplay=0
@@ -58,23 +57,20 @@ const Movie_detailed = () => {
   ));
 
   const similar_list = movieSimilar_res.data.results.map((similar) => (
-    <li
-      key={similar.id}
-      onClick={() => {
-        window.location.replace('/movie/' + similar.id);
-      }}
-      style={{ cursor: 'pointer' }}
-    >
-      <img
-        width="200px"
-        height="300px"
-        src={'https://image.tmdb.org/t/p/w500' + similar.poster_path}
-      />
-      <p>
-        {similar.title.length < 15
-          ? similar.title
-          : similar.title.slice(0, 15) + '...'}
-      </p>
+    <li key={similar.id} style={{ cursor: 'pointer' }}>
+      <Link to={'/movie/' + similar.id}>
+        <img
+          width="200px"
+          height="300px"
+          src={'https://image.tmdb.org/t/p/w500' + similar.poster_path}
+        />
+
+        <p style={{ color: 'white' }}>
+          {similar.title.length < 15
+            ? similar.title
+            : similar.title.slice(0, 15) + '...'}
+        </p>
+      </Link>
     </li>
   ));
 
