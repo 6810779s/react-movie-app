@@ -19,6 +19,11 @@ a{
   margin: auto;
 }
 
+.notFound{
+  margin-top: 50px;
+  color: white;
+}
+
 .container .category{
   padding: 20px 0;
 }

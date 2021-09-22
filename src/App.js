@@ -24,6 +24,9 @@ const App = () => {
         <Route exact path="/react-movie-app" component={MovieList} />
         <Route exact path="/movie/:movie_id" component={Movie_detailed} />
         <Route exact path="/tv" component={TvList} />
+        <Route path="/">
+          <h1 className="notFound">Not found :(</h1>
+        </Route>
       </Switch>
     </div>
   );
