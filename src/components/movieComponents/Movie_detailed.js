@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { usePromise, APIKey, language } from '../../lib/data';
 import Loader from '../Spinner';
 import axios from '../../../node_modules/axios/index';
 import MovieDetailItems from './MovieDetailItems';
@@ -7,15 +8,6 @@ import MovieDetailItems from './MovieDetailItems';
 const Movie_detailed = () => {
   const params = useParams();
   const movie_id = params.movie_id;
-
-  const [loading, setLoading] = useState(false);
-  const [movies, setMovies] = useState({
-    movie_detail: '',
-    movie_videos: '',
-    movie_similar: '',
-  });
-  const APIKey = '7db3edc572c4459c628c28ce8cec50fa';
-  const language = ['ko-KR', 'pt-US'];
   const apiAddress = [
     `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${APIKey}&language=${language[0]}`,
     `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${APIKey}&language=${language[0]}`,
@@ -26,40 +18,34 @@ const Movie_detailed = () => {
   /*
   https://www.youtube.com/embed/&{비디오 key}?autoplay=0
   */
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const movieDetail_res = await axios.get(apiAddress[0]);
-        const movieVideos_res = await axios.get(apiAddress[1]);
-        const movieSimilar_res = await axios.get(apiAddress[2]);
 
-        setMovies({
-          movie_detail: movieDetail_res.data,
-          movie_videos: movieVideos_res.data.results,
-          movie_similar: movieSimilar_res.data.results,
-        });
-      } catch (e) {
-        console.log(e);
-      }
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
+  const [loading1, movieDetail_res, error1] = usePromise(() => {
+    return axios.get(apiAddress[0]);
+  });
+  const [loading2, movieVideos_res, error2] = usePromise(() => {
+    return axios.get(apiAddress[1]);
+  });
+  const [loading3, movieSimilar_res, error3] = usePromise(() => {
+    return axios.get(apiAddress[2]);
+  });
 
-  if (loading) {
+  if (loading1 || loading2 || loading3) {
     return <Loader />;
   }
 
-  if (!movies.movie_detail || !movies.movie_videos || !movies.movie_similar) {
+  if (!movieDetail_res || !movieVideos_res || !movieSimilar_res) {
     return null;
   }
 
-  const genres_list = movies.movie_detail.genres.map((genre) => (
+  if (error1 || error2 || error3) {
+    return '에러 발생';
+  }
+
+  const genres_list = movieDetail_res.data.genres.map((genre) => (
     <span>{genre.name}&nbsp;</span>
   ));
 
-  const videos_list = movies.movie_videos.map((video, index) => (
+  const videos_list = movieVideos_res.data.results.map((video, index) => (
     <div key={index}>
       <iframe
         width="420"
@@ -71,7 +57,7 @@ const Movie_detailed = () => {
     </div>
   ));
 
-  const similar_list = movies.movie_similar.map((similar) => (
+  const similar_list = movieSimilar_res.data.results.map((similar) => (
     <li
       key={similar.id}
       onClick={() => {
@@ -92,21 +78,19 @@ const Movie_detailed = () => {
     </li>
   ));
 
-  console.log('s', movies.movie_detail);
-
   return (
     <div>
       <MovieDetailItems
-        key={movies.movie_detail.id}
+        key={movieDetail_res.data.id}
         poster={
-          `https://image.tmdb.org/t/p/w500` + movies.movie_detail.poster_path
+          `https://image.tmdb.org/t/p/w500` + movieDetail_res.data.poster_path
         }
-        title={movies.movie_detail.title}
+        title={movieDetail_res.data.title}
         genres_list={genres_list}
-        vote_average={movies.movie_detail.vote_average}
-        release_date={movies.movie_detail.release_date.slice(0, 4)}
-        runtime={movies.movie_detail.runtime}
-        overview={movies.movie_detail.overview}
+        vote_average={movieDetail_res.data.vote_average}
+        release_date={movieDetail_res.data.release_date.slice(0, 4)}
+        runtime={movieDetail_res.data.runtime}
+        overview={movieDetail_res.data.overview}
         videos_list={videos_list}
         similar_list={similar_list}
       />
